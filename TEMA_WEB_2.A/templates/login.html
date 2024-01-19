@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Start of Main -->
+<main class="main login-page">
+    <!-- End of Breadcrumb -->
+    <div class="page-content">
+        <div class="container" style="display: flex; justify-content: center;">
+            <div class="login-popup">
+                <div class="tab tab-nav-boxed tab-nav-center tab-nav-underline">
+                    <ul class="nav nav-tabs text-uppercase" role="tablist">
+                        <li class="nav-item">
+                            <a href="#sign-in" class="nav-link active">Login</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+
+
+
+
+                        <form class="tab-pane active" id="sign-in" method="post">
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" class="form-control" name="email" id="email" required>
+                            </div>
+                            <div class="form-group mb-5">
+                                <label>Password *</label>
+                                <input type="password" class="form-control" name="password" id="password" required>
+                            </div>
+                            <p id="formError" class="error-message">
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                      {% for category, message in messages %}
+                                        <div class="alert {{ category }}"> {{ message|capitalize }} </div>
+                                      {% endfor %}
+                                    {% endif %}
+                                  {% endwith %}
+                                </p>
+                            <div class="form-group mb-5" style="display: flex; justify-content: center;">
+                                <input class="btn btn-primary" type="submit" name="submit" value="Login">
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                    <p class="text-center">Sign in with social account</p>
+                    <div class="social-icons social-icon-border-color d-flex justify-content-center">
+                        <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
+                        <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
+                        <a href="#" class="social-icon social-google fab fa-google"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- End of Main -->
+{% endblock %}

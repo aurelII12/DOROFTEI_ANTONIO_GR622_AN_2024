@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <h2>Trivia Game</h2>
+    <p>Testează-ți cunoștințele cu aceste întrebări!</p>
+
+    <div id="question-container" class="question"></div>
+    <div id="options-container"></div>
+
+    <button onclick="nextQuestion()">Next Question</button>
+</div>
+
+<script>
+    const questions = [
+        {
+            question: "Care este capitala Franței?",
+            options: ["Berlin", "Paris", "Londra", "Madrid"],
+            correctAnswer: 1
+        },
+        {
+            question: "Cine a scris tragedia 'Hamlet'?",
+            options: ["William Shakespeare", "Charles Dickens", "Jane Austen", "Fyodor Dostoevsky"],
+            correctAnswer: 0
+        },
+        {
+            question: "Ce planetă este cunoscută ca 'Planeta Roșie'?",
+            options: ["Jupiter", "Marte", "Venus", "Saturn"],
+            correctAnswer: 1
+        },
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function displayQuestion() {
+        const questionContainer = document.getElementById("question-container");
+        const optionsContainer = document.getElementById("options-container");
+        const currentQues = questions[currentQuestion];
+
+        questionContainer.textContent = currentQues.question;
+
+        optionsContainer.innerHTML = "";
+
+        currentQues.options.forEach((option, index) => {
+            const button = document.createElement("button");
+            button.textContent = option;
+            button.onclick = () => checkAnswer(index);
+            optionsContainer.appendChild(button);
+        });
+    }
+
+    function checkAnswer(selectedIndex) {
+        const currentQues = questions[currentQuestion];
+
+        if (selectedIndex === currentQues.correctAnswer) {
+            score++;
+        }
+
+        nextQuestion();
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            displayQuestion();
+        } else {
+            endGame();
+        }
+    }
+
+    function endGame() {
+        const quizContainer = document.getElementById("quiz-container");
+        quizContainer.innerHTML = `<h2>Scorul tău final: ${score} / ${questions.length}</h2>`;
+    }
+
+    displayQuestion();
+</script>
+
+</body>
+</html>
